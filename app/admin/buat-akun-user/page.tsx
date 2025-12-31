@@ -1,15 +1,15 @@
 "use client";
 
-import Buttons from "@/components/atoms/buttons";
-import Inputs from "@/components/atoms/inputs";
-import Labels from "@/components/atoms/labels";
+import Buttons from "@/shared/atoms/buttons";
+import Inputs from "@/shared/atoms/inputs";
+import Labels from "@/shared/atoms/labels";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@/shared/ui/select";
 import Api from "@/services/api";
 import { useState } from "react";
 import Swal from "sweetalert2";
