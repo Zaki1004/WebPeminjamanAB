@@ -1,16 +1,13 @@
-import NavigationBar from "@/components/organism/navbar";
+import Sidebar from "@/shared/organism/sidebar";
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+import { Inter } from "next/font/google";
+import NavigationBar from "@/shared/organism/navbar";
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const inter = Inter({
   subsets: ["latin"],
+  variable: "--font-inter",
 });
 
 export const metadata: Metadata = {
@@ -27,12 +24,21 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen bg-gray-100 text-gray-900`}
+        className={`${inter.variable} antialiased min-h-screen flex flex-col`}
       >
-        <nav className="w-auto">
+        {/* content wrapper: sidebar (fixed width) + main (flexible) */}
+        <div className="flex flex-1 min-h-0">
+          {/* Sidebar: beri lebar tetap dan jangan biarkan mengecil */}
+          <aside className="flex-shrink-0">
+            <Sidebar />
+          </aside>
           <NavigationBar />
-        </nav>
-        {children}
+
+          {/* Main: ambil sisa space, gunakan min-w-0 & overflow-auto untuk scroll dan mencegah overlap */}
+          <main className="flex-1 min-w-0 bg-gray-100 overflow-auto">
+            {children}
+          </main>
+        </div>
       </body>
     </html>
   );
