@@ -1,10 +1,18 @@
 "use client";
 
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
+
+const disabledSidebar = "/";
 
 const Sidebar = () => {
   const [collapsed, setCollapsed] = useState(false);
+  const pathname = usePathname();
+
+  if (disabledSidebar.includes(pathname)) {
+    return null;
+  }
   return (
     <>
       <aside

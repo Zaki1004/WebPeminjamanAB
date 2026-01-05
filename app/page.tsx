@@ -1,17 +1,15 @@
-"use client";
-
+import FormLogin from "@/features/login/components/form-login";
 import Link from "next/link";
-import React from "react";
 
 const Login = () => {
   return (
     <>
-      <div className="flex items-center justify-center min-h-screen flex-col gap-4">
-        <div className="text-white rounded-lg bg-black w-auto h-10 p-4 flex items-center justify-center">
-          <Link href="/super-admin">Super Admin</Link>
-        </div>
-        <div className="text-white rounded-lg bg-black w-auto h-10 p-4 flex items-center justify-center">
-          <Link href="/admin/buat-akun-user">Admin</Link>
+      <div className="min-h-screen w-full flex items-center justify-center">
+        <div className="w-full max-w-md border-2 border-black p-10 rounded-lg">
+          <h1 className="text-lg text-red-500 font-bold mb-4 text-center">
+            Login Sistem Inventaris AB DIGI
+          </h1>
+          <FormLogin />
         </div>
       </div>
     </>

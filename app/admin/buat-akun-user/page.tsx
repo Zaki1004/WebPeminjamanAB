@@ -128,8 +128,8 @@ const BuatAkunUser = (): JSX.Element => {
   };
 
   return (
-    <div className="relative w-full h-screen">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center flex flex-col items-center justify-center border border-gray-300 px-8 py-6 rounded-lg bg-white shadow-lg">
+    <div className="flex justify-center items-start">
+      <div className="mt-10 flex flex-col items-center border border-gray-300 px-8 py-6 rounded-lg bg-white shadow-lg">
         <h1 className="text-xl font-semibold mb-4">
           Silahkan Buat Akun untuk User Baru
         </h1>

@@ -1,17 +1,21 @@
 "use client";
 
-import Link from "next/link";
 import { usePathname } from "next/navigation";
-import Inputs from "../atoms/inputs";
 import { useState } from "react";
+import Inputs from "../atoms/inputs";
+
+const disabledNavbar = "/";
 
 const NavigationBar = () => {
   const pathname = usePathname();
   const [seacrh, setSearch] = useState("");
 
+  if (disabledNavbar.includes(pathname)) {
+    return null;
+  }
   return (
     <>
-      <div className="border-2 border-black flex gap-4 w-full h-20 overflow-hidden ml-4">
+      <div className="border-2 border-black flex gap-4 h-20 overflow-hidden ml-4">
         <Inputs
           placeholder="Search..."
           className="w-100 h-10 mt-5 ml-4 border-2 border-black"

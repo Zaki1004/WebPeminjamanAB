@@ -23,19 +23,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${inter.variable} antialiased min-h-screen flex flex-col`}
-      >
-        {/* content wrapper: sidebar (fixed width) + main (flexible) */}
-        <div className="flex flex-1 min-h-0">
-          {/* Sidebar: beri lebar tetap dan jangan biarkan mengecil */}
-          <aside className="flex-shrink-0">
-            <Sidebar />
-          </aside>
+      <body className={`${inter.variable} antialiased min-h-screen flex`}>
+        {/* Sidebar: beri lebar tetap dan jangan biarkan mengecil */}
+        <aside className="flex-shrink-0">
+          <Sidebar />
+        </aside>
+        <div className="flex flex-col flex-1 min-w-0">
           <NavigationBar />
 
           {/* Main: ambil sisa space, gunakan min-w-0 & overflow-auto untuk scroll dan mencegah overlap */}
-          <main className="flex-1 min-w-0 bg-gray-100 overflow-auto">
+          <main className="flex-1 p-6 bg-gray-100 overflow-auto">
             {children}
           </main>
         </div>

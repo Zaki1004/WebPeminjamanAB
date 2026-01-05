@@ -3,8 +3,8 @@ import { Label } from "../ui/label";
 
 interface LabelsProps {
   htmlFor: string;
-  className: string;
-  children?: React.ReactNode;
+  className?: string;
+  children: React.ReactNode;
 }
 
 const Labels = ({ htmlFor, className, children }: LabelsProps) => {
