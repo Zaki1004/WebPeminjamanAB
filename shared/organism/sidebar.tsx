@@ -1,5 +1,6 @@
 "use client";
 
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -8,11 +9,25 @@ const disabledSidebar = "/";
 
 const Sidebar = () => {
   const [collapsed, setCollapsed] = useState(false);
+  const { data: session, status } = useSession();
   const pathname = usePathname();
 
   if (disabledSidebar.includes(pathname)) {
     return null;
   }
+
+  // ⏳ Loading → jangan render apa pun
+  if (status === "loading") return null;
+
+  // 🔐 Belum login → sidebar tidak ada
+  if (!session) return null;
+
+  const role = session.user.role;
+
+  // 🔒 Filter menu berdasarkan role
+  if (pathname.startsWith("/admin") && role !== "admin") return null;
+  if (pathname.startsWith("/super-admin") && role !== "superadmin") return null;
+
   return (
     <>
       <aside

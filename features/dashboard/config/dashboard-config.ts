@@ -13,7 +13,7 @@ export const DASHBOARD_CARDS = [
   {
     id: "total-peminjaman",
     component: TotalPeminjamanCard,
-    permissions: ["dashboard.superadmin", "dashboard.admin", "dashboard.external"],
+    permissions: ["dashboard.superadmin", "dashboard.admin"],
   },
   {
     id: "barang-rusak",
@@ -48,11 +48,6 @@ export const DASHBOARD_CARDS = [
   {
     id: "denda-aktif",
     component: DendaAktifCard,
-    permissions: ["dashboard.superadmin"],
-  },
-  {
-    id: "barang-dipinjam",
-    component: BarangDipinjamCard,
     permissions: ["dashboard.superadmin"],
   },
 ];

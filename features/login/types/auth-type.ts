@@ -1,4 +1,4 @@
-export type Role = "SUPERADMIN" | "ADMIN" | "EKSTERNAL";
+export type Role = "superadmin" | "admin" | "external";
 
 export interface LoginPayload {
   nra: string;
@@ -7,7 +7,10 @@ export interface LoginPayload {
 
 export interface LoginResponse {
   accessToken: string;
+  refreshToken: string;
   role: Role;
+  mustChangePassword: boolean;
+  mustFillEmail: boolean;
 }
 export interface AuthState {
   isAuthenticated: boolean;

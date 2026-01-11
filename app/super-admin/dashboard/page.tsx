@@ -27,12 +27,12 @@
 "use client";
 
 import DashboardPage from "@/features/dashboard/page";
-import { getRole } from "@/lib/auth";
+import { useAuthRole } from "@/lib/auth";
 
 const SuperAdminDashboard = () => {
-  const role = getRole(); // ambil dari token (misal SUPERADMIN)
+  const role = useAuthRole(); // ambil dari token (misal SUPERADMIN)
 
-  if (role !== "SUPERADMIN") {
+  if (role !== "superadmin") {
     return <div className="p-4 text-red-500">Access Denied</div>;
   }
 

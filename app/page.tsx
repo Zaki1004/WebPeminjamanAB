@@ -1,5 +1,4 @@
 import FormLogin from "@/features/login/components/form-login";
-import Link from "next/link";
 
 const Login = () => {
   return (
