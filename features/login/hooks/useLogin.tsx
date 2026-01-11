@@ -1,8 +1,13 @@
+"use client";
+
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { loginService } from "../services/auth-services";
-import { LoginPayload } from "../types/auth-type";
-import { saveAuth } from "@/lib/auth";
+import { signIn } from "next-auth/react";
+
+interface LoginPayload {
+  nra: string;
+  password: string;
+}
 
 export const useLogin = () => {
   const router = useRouter();
@@ -14,20 +19,22 @@ export const useLogin = () => {
       setLoading(true);
       setError(null);
 
-      const res = await loginService(payload);
-      saveAuth(res.accessToken, res.role);
+      const result = await signIn("credentials", {
+        nra: payload.nra,
+        password: payload.password,
+        redirect: false,
+      });
 
-      // Redirect multi-role
-      switch (res.role) {
-        case "SUPERADMIN":
-          router.push("/superadmin/dashboard");
-          break;
-        case "ADMIN":
-          router.push("/admin/dashboard");
-          break;
-        default:
-          router.push("/dashboard");
+      if (!result || result.error) {
+        throw new Error("Login gagal");
       }
+
+      /**
+       * JANGAN ambil role di sini
+       * JANGAN simpan token manual
+       * NextAuth yang pegang session
+       */
+      router.push("/dashboard"); // dashboard netral
     } catch {
       setError("NRA atau password salah");
     } finally {
@@ -37,3 +44,4 @@ export const useLogin = () => {
 
   return { login, loading, error };
 };
+export default useLogin;

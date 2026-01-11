@@ -23,16 +23,23 @@
 "use client";
 
 import DashboardPage from "@/features/dashboard/page";
-import { getRole } from "@/lib/auth";
+import { AdminTableListBarang } from "@/features/peminjaman/list-barang/components/table-admin";
+import { useAuthRole } from "@/lib/auth";
 
 const AdminDashboard = () => {
-  const role = getRole(); // ambil dari token (misal ADMIN)
+  const role = useAuthRole(); // ambil dari token (misal ADMIN)
 
-  if (role !== "ADMIN") {
+  if (role !== "admin") {
     return <div className="p-4 text-red-500">Access Denied</div>;
   }
 
-  return <DashboardPage />;
+  return (
+    <div>
+      <DashboardPage />
+      <h1 className="text-xl font-semibold mb-4">Data Barang</h1>
+      <AdminTableListBarang />
+    </div>
+  );
 };
 
 export default AdminDashboard;
