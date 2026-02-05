@@ -6,11 +6,11 @@ interface FormFieldProps {
   children: React.ReactNode;
   htmlFor: string;
   placeholder: string;
-  type: string;
-  className: string;
+  type?: React.HTMLInputTypeAttribute;
+  className?: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
-  value?: string;
+  value: string | number;
 }
 
 const FormField = ({
