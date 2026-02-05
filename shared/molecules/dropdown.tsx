@@ -5,7 +5,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "../ui/select";
 import Labels from "../atoms/labels";
 
 interface FormSelectProps<T extends string> {

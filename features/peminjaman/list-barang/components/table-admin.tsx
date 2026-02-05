@@ -21,6 +21,8 @@ import {
   BarangStatus,
   DetailBarangTypes,
 } from "../types/list-barang-types";
+import useLoadingStore from "@/store/useLoadingStore";
+import { useShallow } from "zustand/react/shallow";
 
 export function AdminTableListBarang() {
   const barang = useBarang();
@@ -31,6 +33,13 @@ export function AdminTableListBarang() {
   const [file, setFile] = useState<File | null>(null);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [hasNewFile, setHasNewFile] = useState(false);
+  const { count, start, stop } = useLoadingStore(
+    useShallow((state) => ({
+      count: state.count,
+      start: state.start,
+      stop: state.stop,
+    })),
+  );
 
   useEffect(() => {
     if (barang.action === "edit" && barang.selectedRow) {
@@ -103,7 +112,7 @@ export function AdminTableListBarang() {
       <DataTable
         columns={AdminColumns(barang)}
         data={barang.data}
-        loading={barang.loading}
+        loading={count > 0}
         emptyText="Data barang belum tersedia"
       />
 
@@ -480,7 +489,13 @@ export function AdminTableListBarang() {
   );
 }
 
-function DetailItem({ label, value }: { label: string; value: any }) {
+function DetailItem({
+  label,
+  value,
+}: {
+  label: string;
+  value: string | number;
+}) {
   return (
     <div>
       <p className="text-muted-foreground">{label}</p>

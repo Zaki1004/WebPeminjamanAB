@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
+import useLoadingStore from "@/store/useLoadingStore";
 
 interface LoginPayload {
   nra: string;
@@ -11,14 +12,13 @@ interface LoginPayload {
 
 export const useLogin = () => {
   const router = useRouter();
-  const [loading, setLoading] = useState(false);
+  const { start, stop } = useLoadingStore();
   const [error, setError] = useState<string | null>(null);
 
   const login = async (payload: LoginPayload) => {
+    start();
+    setError(null);
     try {
-      setLoading(true);
-      setError(null);
-
       const result = await signIn("credentials", {
         nra: payload.nra,
         password: payload.password,
@@ -38,10 +38,10 @@ export const useLogin = () => {
     } catch {
       setError("NRA atau password salah");
     } finally {
-      setLoading(false);
+      stop();
     }
   };
 
-  return { login, loading, error };
+  return { login, error };
 };
 export default useLogin;
