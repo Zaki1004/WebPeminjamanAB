@@ -40,7 +40,7 @@ const NavigationBar = () => {
       <div className="border-2 border-black flex gap-4 h-20 overflow-hidden ml-4 justify-between flex-row items-center">
         <Inputs
           placeholder="Search..."
-          className="w-100 h-10 mt-5 ml-4 border-2 border-black"
+          className="w-100 h-10 ml-4 border-2 border-black"
           type="search"
           onKeyDown={(e) => {
             if (e.key === "Enter") {

@@ -37,7 +37,7 @@ export function DataTable<T>({
   return (
     <Table>
       <TableHeader>
-        <TableRow>
+        <TableRow className="border-b-2 border-black">
           {columns.map((col) => (
             <TableHead key={col.header}>{col.header}</TableHead>
           ))}
@@ -48,7 +48,7 @@ export function DataTable<T>({
         {data.map((row, rowIndex) => (
           <TableRow key={rowIndex}>
             {columns.map((col) => (
-              <TableCell key={col.header}>
+              <TableCell key={col.header} className="p-4">
                 {col.render ? col.render(row) : String(row[col.key as keyof T])}
               </TableCell>
             ))}

@@ -48,6 +48,7 @@ const FormLogin = () => {
         htmlFor="nra"
         type="text"
         placeholder="Masukkan NRA Anda"
+        value={nra}
         className="w-full p-2 border border-gray-300 rounded"
         onChange={(e) => setNra(e.target.value)}
       >
@@ -59,6 +60,7 @@ const FormLogin = () => {
           htmlFor="password"
           type={showPassword ? "text" : "password"}
           placeholder="*********"
+          value={password}
           className="w-full p-2 border border-gray-300 rounded"
           onChange={(e) => setPassword(e.target.value)}
         >

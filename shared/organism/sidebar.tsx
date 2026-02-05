@@ -2,6 +2,7 @@
 
 import { useSession } from "next-auth/react";
 import Image from "next/image";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
@@ -85,10 +86,10 @@ const Sidebar = () => {
         </div>
         <div className="m-4 space-y-4">
           <div className="border-2 border-black text-black p-2 rounded-md font-medium hover:bg-gray-300 cursor-pointer hover:border-gray-300">
-            Dashboard
+            <Link href="/admin/dashboard"> Dashboard </Link>
           </div>
           <div className="border-2 border-black text-black p-2 rounded-md font-medium hover:bg-gray-300 cursor-pointer hover:border-gray-300">
-            Admin List
+            <Link href="/admin/buat-akun-user">Buat Akun User</Link>
           </div>
           <div className="border-2 border-black text-black p-2 rounded-md font-medium hover:bg-gray-300 cursor-pointer hover:border-gray-300">
             User List

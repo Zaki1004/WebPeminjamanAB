@@ -1,4 +1,5 @@
 import FormLogin from "@/features/login/components/form-login";
+import Link from "next/link";
 
 const Login = () => {
   return (
@@ -9,6 +10,9 @@ const Login = () => {
             Login Sistem Inventaris AB DIGI
           </h1>
           <FormLogin />
+          {/* <div className="bg-red-200 rounded-lg">
+            <Link href="/admin/dashboard">Admin</Link>
+          </div> */}
         </div>
       </div>
     </>
