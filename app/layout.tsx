@@ -5,6 +5,7 @@ import "./globals.css";
 import NavigationBar from "@/shared/organism/navbar";
 import { Inter } from "next/font/google";
 import Providers from "./provider/page";
+import GlobalSpinner from "@/shared/organism/spinner-loading";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -26,6 +27,7 @@ export default async function RootLayout({
     <html lang="en">
       <body className={`${inter.variable} antialiased min-h-screen flex`}>
         <Providers>
+          <GlobalSpinner />
           {/* Sidebar: beri lebar tetap dan jangan biarkan mengecil */}
           <aside className="flex-shrink-0">
             <Sidebar />

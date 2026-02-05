@@ -1,10 +1,11 @@
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
+import { barangService } from "../services/list-barang-services";
 import {
   DetailBarangTypes,
   ListBarangTypes,
 } from "../types/list-barang-types";
-import { barangService } from "../services/list-barang-services";
+import useLoadingStore from "@/store/useLoadingStore";
 
 type ActionType = "detail" | "edit" | "delete" | null;
 
@@ -12,28 +13,16 @@ const useBarang = () => {
   const { data: session, status } = useSession();
   const token = session?.user?.accessToken ?? "";
 
-  /* ======================
-     LIST STATE
-     ====================== */
   const [data, setData] = useState<ListBarangTypes[]>([]);
-  const [loading, setLoading] = useState(false);
-
-  /* ======================
-     DIALOG STATE
-     ====================== */
   const [open, setOpen] = useState(false);
   const [action, setAction] = useState<ActionType>(null);
   const [selectedRow, setSelectedRow] =
     useState<DetailBarangTypes | null>(null);
-
-  /* ======================
-     UPLOAD IMAGE STATE 
-     ====================== */
   const [imagePreview, setImagePreview] =
     useState<string | null>(null);
   const [uploading, setUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
-  const [uploadSucces, setUploadSucces] = useState(false);
+  const {start, stop} = useLoadingStore();
 
   /* ======================
      FETCH LIST
@@ -41,7 +30,7 @@ const useBarang = () => {
   const fetchList = async () => {
     if (!token) return;
 
-    setLoading(true);
+    start();
     try {
       const res = await barangService.getList(token);
       setData(Array.isArray(res.data.data) ? res.data.data : []);
@@ -49,7 +38,7 @@ const useBarang = () => {
       console.error("Fetch barang error:", error);
       setData([]);
     } finally {
-      setLoading(false);
+      stop();
     }
   };
 
@@ -61,7 +50,7 @@ const useBarang = () => {
 
     setAction(type);
     setOpen(true);
-    setLoading(true);
+    start();
 
     try {
       const res = await barangService.getDetail(kode, token);
@@ -77,7 +66,7 @@ const useBarang = () => {
         setImagePreview(null);
       }
     } finally {
-      setLoading(false);
+      stop();
     }
   };
 
@@ -220,7 +209,6 @@ const useBarang = () => {
   return {
     // data
     data,
-    loading,
 
     // dialog
     open,
